@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:helloworld/home.dart';
+import 'package:helloworld/search.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,38 +25,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int currentIndex = 0;
+  List _navigationList = [
+    Home(),
+    Search()
+  ];
 
-  void _incrementCounter() {
+  void _onTaped (int index){
     setState(() {
-      _counter++;
+      currentIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
+        child: _navigationList[currentIndex]
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: _onTaped,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home, color: Colors.blue,),
+            title: new Text(''),
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.search, color: Colors.blue,),
+            title: new Text(''),
+          ),
+        ]
       ),
     );
   }
