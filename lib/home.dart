@@ -6,6 +6,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _counter = 0;
+  void _increase(){
+    setState(() {
+      _counter++;
+    });
+  }
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -13,8 +19,20 @@ class _HomeState extends State<Home> {
         title: Text('Home')
       ),
       body: Center(
-        child: Text('Home')
-      )
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display1
+            ), 
+          ]
+        )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _increase,
+        child: Icon(Icons.add)
+      ),
     );
   }
 }
